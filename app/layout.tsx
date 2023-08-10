@@ -1,5 +1,5 @@
 import { Nunito } from "next/font/google";
-
+import Navbar from "@/app/components/navbar/Navbar";
 import './globals.css'
 
 export const metadata = {
@@ -18,8 +18,10 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <head />
-            <body suppressHydrationWarning={true} className={font.className}>{children}</body>
+            <body suppressHydrationWarning={true} className={font.className}>
+                <Navbar />
+                {children}
+            </body>
         </html>
     )
 }
