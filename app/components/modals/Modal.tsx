@@ -112,6 +112,7 @@ const Modal: React.FC<ModalProps> = ({
               bg-white 
               outline-none 
               focus:outline-none
+              overflow-auto
             "
           >
             {/*header*/}
