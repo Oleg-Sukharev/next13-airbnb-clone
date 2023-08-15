@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
@@ -11,7 +11,8 @@ import {
   useForm
 } from "react-hook-form";
 
-import useRegisterModal from "@/app/hooks/useRegistrationModal";
+import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useLoginModal from "@/app/hooks/useLoginModal";
 
 import Modal from "./Modal";
 import Input from "../inputs/Input";
@@ -21,6 +22,7 @@ import Button from "../Button";
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -36,6 +38,11 @@ const RegisterModal = () => {
       password: ""
     }
   })
+
+  const onToggle = useCallback(() => {
+    loginModal.onOpen();
+    registerModal.onClose();
+  }, [loginModal, loginModal])
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
@@ -109,6 +116,7 @@ const RegisterModal = () => {
       >
         <p>Already have an account? {" "}
           <button
+            onClick={onToggle}
             className="
               text-neutral-800
               cursor-pointer 
