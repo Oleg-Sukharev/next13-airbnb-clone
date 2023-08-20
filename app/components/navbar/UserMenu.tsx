@@ -6,7 +6,16 @@ import MenuItem from "./MenuItem";
 import { useState, useCallback } from "react";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useLoginModal from "@/app/hooks/useLoginModal";
-const UserMenu = () => {
+import { User } from '.prisma/client';
+import { signOut } from 'next-auth/react';
+
+interface UserMenuProps {
+  currentUser: User | null;
+}
+
+const UserMenu: React.FC<UserMenuProps> = ({
+  currentUser
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
@@ -85,15 +94,51 @@ const UserMenu = () => {
           "
         >
           <div className="flex flex-col cursor-pointer">
-            <MenuItem
-              onClick={closeLoginModal}
-              label="Login"
-            />
+            {currentUser ?
+              <>
+                <MenuItem
+                  onClick={() => { }}
+                  label="My trips"
+                />
 
-            <MenuItem
-              onClick={closeRegisterModal}
-              label="Sign up"
-            />
+                <MenuItem
+                  onClick={() => { }}
+                  label="My favorites"
+                />
+
+                <MenuItem
+                  onClick={() => { }}
+                  label="My reservations"
+                />
+
+                <MenuItem
+                  onClick={() => { }}
+                  label="My properties"
+                />
+
+                <MenuItem
+                  onClick={() => { }}
+                  label="Airbnb my home"
+                />
+                <hr />
+                <MenuItem
+                  onClick={() => signOut()}
+                  label="Logout"
+                />
+              </>
+              :
+              <>
+                <MenuItem
+                  onClick={closeLoginModal}
+                  label="Login"
+                />
+
+                <MenuItem
+                  onClick={closeRegisterModal}
+                  label="Sign up"
+                />
+              </>
+            }
           </div>
         </div>
       )}
