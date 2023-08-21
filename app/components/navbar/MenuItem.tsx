@@ -10,7 +10,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
   label
 }) => {
   return (
-    <div
+    <button
       onClick={onClick}
       className="
         px-4 
@@ -21,7 +21,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
       "
     >
       {label}
-    </div>
+    </button>
   )
 }
 
