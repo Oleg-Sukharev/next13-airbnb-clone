@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, KeyboardEvent } from "react";
 import Button from "../navbar/Button";
 import { IoMdClose } from "react-icons/io"
 
@@ -47,9 +47,24 @@ const Modal: React.FC<ModalProps> = ({
     if (disabled) {
       return;
     }
-
     onSubmit();
   }, [onSubmit, disabled]);
+
+
+
+  const keyUpEventListener = (event: any) => {
+    // const keyUpEventListener = (event: KeyboardEvent<HTMLElement>) => {
+    if (event.key === 'Escape') {
+      handleClose();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keyup', keyUpEventListener);
+    return () => {
+      window.removeEventListener('keyup', keyUpEventListener);
+    };
+  }, []);
 
   const handleSecondaryAction = useCallback(() => {
     if (disabled || !secondaryAction) {
@@ -72,12 +87,22 @@ const Modal: React.FC<ModalProps> = ({
           fixed 
           inset-0 
           z-50 
-          outline-none 
-          focus:outline-none
-          bg-neutral-800/70
         "
     >
+      <div
+        onClick={handleClose}
+        className="
+          overflow-y-auto
+          fixed
+          inset-0
+          z-40
+          outline-none
+          focus:outline-none
+          bg-neutral-800/70
+      ">
+      </div>
       <div className="
+          z-50
           relative 
           w-full
           md:w-4/6
