@@ -92,7 +92,6 @@ const Modal: React.FC<ModalProps> = ({
       <div
         onClick={handleClose}
         className="
-          overflow-y-auto
           fixed
           inset-0
           z-40
@@ -103,14 +102,14 @@ const Modal: React.FC<ModalProps> = ({
       </div>
       <div className="
           z-50
-          relative 
+          relative
           w-full
           md:w-4/6
           lg:w-3/6
           xl:w-2/5
           my-6
-          mx-auto 
-          h-full 
+          mx-auto
+          h-full
           lg:h-auto
           md:h-auto
           "
@@ -137,7 +136,6 @@ const Modal: React.FC<ModalProps> = ({
               bg-white 
               outline-none 
               focus:outline-none
-              overflow-auto
             "
           >
             {/*header*/}
