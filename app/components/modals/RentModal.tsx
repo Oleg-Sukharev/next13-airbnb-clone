@@ -1,28 +1,27 @@
 "use client";
 
-import Modal from "./Modal";
-import useRentModal from "@/app/hooks/useRentModal";
 import { useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-
-import { useRouter } from "next/navigation";
-
+import dynamic from 'next/dynamic'
 import {
   FieldValues,
   SubmitHandler,
   useForm
 } from 'react-hook-form';
 
+import useRentModal from "@/app/hooks/useRentModal";
+import categories from '@/app/data/categories';
+
+import Modal from "./Modal";
 import Heading from "../Heading";
 import CategoryInput from "../inputs/CategoryInput";
-import categories from '@/app/data/categories';
 import CountrySelect from "../inputs/CountrySelect";
 import Counter from "../inputs/Counter";
 import ImageUpload from "../ImageUpload";
 import Input from "../inputs/Input";
 
-import dynamic from 'next/dynamic'
 
 enum STEPS {
   CATEGORY = 0,
@@ -34,10 +33,10 @@ enum STEPS {
 }
 
 const RentModal = () => {
+  const router = useRouter();
   const rentModal = useRentModal();
   const [step, setStep] = useState<STEPS>(STEPS.CATEGORY);
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
   const onBack = (): void => setStep((value: number) => value - 1);
   const onNext = (): void => setStep((value: number) => value + 1);
