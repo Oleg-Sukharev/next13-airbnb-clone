@@ -7,6 +7,7 @@ import getListings, {
 } from "@/app/actions/getListings";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import ClientOnly from "./components/ClientOnly";
+import { SafeListing } from './types';
 
 interface HomeProps {
   searchParams: IListingsParams
@@ -41,7 +42,7 @@ const Home = async ({ searchParams }: HomeProps) => {
           "
         >
 
-          {listings.map((listing: any) => (
+          {listings.map((listing: SafeListing) => (
             <ListingCard
               currentUser={currentUser}
               key={listing.id}
