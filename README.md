@@ -11,6 +11,7 @@ Features:
 - Google authentication
 - Github authentication
 - Image upload using Cloudinary CDN
+- Date utility library date-fns
 - Client form validation and handling using react-hook-form
 - Server error handling using react-toast
 - Calendars with react-date-range
