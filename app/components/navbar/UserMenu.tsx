@@ -3,12 +3,13 @@
 import { AiOutlineMenu } from "react-icons/ai"
 import Avatar from "./Avatar";
 import MenuItem from "./MenuItem";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useRentModal from '@/app/hooks/useRentModal';
 import { signOut } from 'next-auth/react';
 import { SafeUser } from '@/app/types';
+import { useRouter } from "next/navigation";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null;
@@ -18,9 +19,11 @@ const UserMenu: React.FC<UserMenuProps> = ({
   currentUser
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLInputElement>(null);
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const rentModal = useRentModal();
+  const router = useRouter();
 
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value)
@@ -41,10 +44,27 @@ const UserMenu: React.FC<UserMenuProps> = ({
       return loginModal.onOpen();
     }
     rentModal.onOpen();
-  }, [currentUser, loginModal, rentModal])
+  }, [currentUser, loginModal, rentModal]);
+
+  useEffect(() => {
+    let outOfBoundsClickHandler = (event: any) => {
+      if (
+        isOpen && menuRef.current &&
+        !menuRef.current.contains(event.target)
+        // !menuRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("click", outOfBoundsClickHandler);
+
+    return () => {
+      document.removeEventListener("click", outOfBoundsClickHandler);
+    };
+  }, [isOpen]);
 
   return (
-    <div className="relative">
+    <div className="relative" ref={menuRef}>
       <div className="flex flex-row items-center gap-3">
         <button
           onClick={onRent}
@@ -106,7 +126,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
             {currentUser ?
               <>
                 <MenuItem
-                  onClick={() => { }}
+                  onClick={() => router.push('/trips')}
                   label="My trips"
                 />
 
