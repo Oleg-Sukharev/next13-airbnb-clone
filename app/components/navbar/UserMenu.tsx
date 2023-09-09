@@ -47,19 +47,19 @@ const UserMenu: React.FC<UserMenuProps> = ({
   }, [currentUser, loginModal, rentModal]);
 
   useEffect(() => {
-    let outOfBoundsClickHandler = (event: any) => {
+    const onClickOutOfBounds = (event: any) => {
       if (
         isOpen && menuRef.current &&
-        !menuRef.current.contains(event.target)
+        !menuRef.current.contains(event?.target)
         // !menuRef.current.contains(event.target as Node)
       ) {
         setIsOpen(false);
       }
     }
-    document.addEventListener("click", outOfBoundsClickHandler);
+    document.addEventListener("click", onClickOutOfBounds);
 
     return () => {
-      document.removeEventListener("click", outOfBoundsClickHandler);
+      document.removeEventListener("click", onClickOutOfBounds);
     };
   }, [isOpen]);
 
