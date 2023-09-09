@@ -70,7 +70,8 @@ const ListingCard: React.FC<ListingCardProps> = ({
   }, [reservation]);
 
   return (
-    <button
+    <div
+      tabIndex={0}
       onClick={() => router.push(`/listings/${data.id}`)}
       className="col-span-1 cursor-pointer group"
     >
@@ -130,7 +131,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
           />
         )}
       </div>
-    </button>
+    </div>
   );
 }
 
