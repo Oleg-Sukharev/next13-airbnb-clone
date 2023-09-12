@@ -41,7 +41,15 @@ const Modal: React.FC<ModalProps> = ({
     setTimeout(() => {
       onClose();
     }, 300);
-  }, [disabled, onClose])
+  }, [disabled, onClose]);
+
+
+  const keyUpEventListener = useCallback((event: any) => {
+    // const keyUpEventListener = (event: KeyboardEvent<HTMLElement>) => {
+    if (event.key === 'Escape') {
+      handleClose();
+    }
+  }, [handleClose]);
 
   const handleSubmit = useCallback(() => {
     if (disabled) {
@@ -51,20 +59,14 @@ const Modal: React.FC<ModalProps> = ({
   }, [onSubmit, disabled]);
 
 
-
-  const keyUpEventListener = (event: any) => {
-    // const keyUpEventListener = (event: KeyboardEvent<HTMLElement>) => {
-    if (event.key === 'Escape') {
-      handleClose();
-    }
-  };
-
   useEffect(() => {
+
+
     window.addEventListener('keyup', keyUpEventListener);
     return () => {
       window.removeEventListener('keyup', keyUpEventListener);
     };
-  }, []);
+  }, [handleClose]);
 
   const handleSecondaryAction = useCallback(() => {
     if (disabled || !secondaryAction) {

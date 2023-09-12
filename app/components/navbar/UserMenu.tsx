@@ -32,12 +32,12 @@ const UserMenu: React.FC<UserMenuProps> = ({
   const closeRegisterModal = useCallback(() => {
     toggleOpen();
     registerModal.onOpen();
-  }, []);
+  }, [registerModal, toggleOpen]);
 
   const closeLoginModal = useCallback(() => {
     toggleOpen();
     loginModal.onOpen();
-  }, []);
+  }, [loginModal, toggleOpen]);
 
   const onRent = useCallback(() => {
     if (!currentUser) {
