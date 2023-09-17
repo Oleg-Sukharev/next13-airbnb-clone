@@ -16,6 +16,6 @@ const Logo = () => {
       priority={false}
     />
   );
-}
+};
 
 export default Logo;

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { PuffLoader } from "react-spinners";
 
@@ -13,12 +13,9 @@ const Loader = () => {
       items-center 
     "
     >
-      <PuffLoader
-        size={100}
-        color="red"
-      />
+      <PuffLoader size={100} color="red" />
     </div>
   );
-}
+};
 
 export default Loader;

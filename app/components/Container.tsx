@@ -1,9 +1,8 @@
-'use client';
+"use client";
 
 interface ContainerProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
-
 
 const Container: React.FC<ContainerProps> = ({ children }) => {
   return (
@@ -15,10 +14,11 @@ const Container: React.FC<ContainerProps> = ({ children }) => {
         md:px-10
         sm:px-2
         px-4
-    ">
+    "
+    >
       {children}
     </div>
   );
-}
+};
 
 export default Container;

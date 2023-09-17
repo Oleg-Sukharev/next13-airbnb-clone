@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from "next/navigation";
 import CategoryBox from "../CategoryBox";
-import Container from '../Container';
+import Container from "../Container";
 import categoriesData from "@/app/data/categories";
 
 const Categories = () => {
   const params = useSearchParams();
-  const category = params?.get('category');
+  const category = params?.get("category");
   const pathname = usePathname();
-  const isMainPage = pathname === '/';
+  const isMainPage = pathname === "/";
 
   if (!isMainPage) {
     return null;
@@ -38,6 +38,6 @@ const Categories = () => {
       </div>
     </Container>
   );
-}
+};
 
 export default Categories;

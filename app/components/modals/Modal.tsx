@@ -1,7 +1,7 @@
-'use client';
+"use client";
 import { useState, useEffect, useCallback, KeyboardEvent } from "react";
 import Button from "../navbar/Button";
-import { IoMdClose } from "react-icons/io"
+import { IoMdClose } from "react-icons/io";
 
 interface ModalProps {
   isOpen?: boolean;
@@ -26,11 +26,11 @@ const Modal: React.FC<ModalProps> = ({
   actionLabel,
   disabled,
   secondaryAction,
-  secondaryActionLabel
+  secondaryActionLabel,
 }) => {
   const [showModal, setShowModal] = useState(isOpen);
   useEffect(() => {
-    setShowModal(isOpen)
+    setShowModal(isOpen);
   }, [isOpen]);
 
   const handleClose = useCallback(() => {
@@ -43,13 +43,15 @@ const Modal: React.FC<ModalProps> = ({
     }, 300);
   }, [disabled, onClose]);
 
-
-  const keyUpEventListener = useCallback((event: any) => {
-    // const keyUpEventListener = (event: KeyboardEvent<HTMLElement>) => {
-    if (event.key === 'Escape') {
-      handleClose();
-    }
-  }, [handleClose]);
+  const keyUpEventListener = useCallback(
+    (event: any) => {
+      // const keyUpEventListener = (event: KeyboardEvent<HTMLElement>) => {
+      if (event.key === "Escape") {
+        handleClose();
+      }
+    },
+    [handleClose],
+  );
 
   const handleSubmit = useCallback(() => {
     if (disabled) {
@@ -58,13 +60,10 @@ const Modal: React.FC<ModalProps> = ({
     onSubmit();
   }, [onSubmit, disabled]);
 
-
   useEffect(() => {
-
-
-    window.addEventListener('keyup', keyUpEventListener);
+    window.addEventListener("keyup", keyUpEventListener);
     return () => {
-      window.removeEventListener('keyup', keyUpEventListener);
+      window.removeEventListener("keyup", keyUpEventListener);
     };
   }, [handleClose]);
 
@@ -100,9 +99,10 @@ const Modal: React.FC<ModalProps> = ({
           outline-none
           focus:outline-none
           bg-neutral-800/70
-      ">
-      </div>
-      <div className="
+      "
+      ></div>
+      <div
+        className="
           z-50
           relative
           w-full
@@ -116,14 +116,17 @@ const Modal: React.FC<ModalProps> = ({
           md:h-auto
           "
       >
-        <div className={`
+        <div
+          className={`
             translate
             duration-300
             h-full
-            ${showModal ? 'translate-y-0' : 'translate-y-full'}
-            ${showModal ? 'opacity-100' : 'opacity-0'}
-          `}>
-          <div className="
+            ${showModal ? "translate-y-0" : "translate-y-full"}
+            ${showModal ? "opacity-100" : "opacity-0"}
+          `}
+        >
+          <div
+            className="
               translate
               h-full
               lg:h-auto
@@ -141,7 +144,8 @@ const Modal: React.FC<ModalProps> = ({
             "
           >
             {/*header*/}
-            <div className="
+            <div
+              className="
                 flex 
                 items-center 
                 p-6
@@ -165,13 +169,9 @@ const Modal: React.FC<ModalProps> = ({
               >
                 <IoMdClose size={22} />
               </button>
-              <h3 className="text-lg font-semibold">
-                {title}
-              </h3>
+              <h3 className="text-lg font-semibold">{title}</h3>
             </div>
-            <div className="relative p-6 flex-auto">
-              {body}
-            </div>
+            <div className="relative p-6 flex-auto">{body}</div>
             <div className="flex flex-col gap-2 p-6">
               <div
                 className="
@@ -203,6 +203,6 @@ const Modal: React.FC<ModalProps> = ({
       </div>
     </div>
   );
-}
+};
 
 export default Modal;

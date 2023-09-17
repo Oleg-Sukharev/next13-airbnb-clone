@@ -1,14 +1,11 @@
 "use client";
 
 interface MenuItemProps {
-  onClick: () => void,
-  label: string
+  onClick: () => void;
+  label: string;
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({
-  onClick,
-  label
-}) => {
+const MenuItem: React.FC<MenuItemProps> = ({ onClick, label }) => {
   return (
     <button
       onClick={onClick}
@@ -22,7 +19,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
     >
       {label}
     </button>
-  )
-}
+  );
+};
 
 export default MenuItem;

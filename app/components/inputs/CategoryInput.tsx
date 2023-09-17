@@ -1,9 +1,9 @@
 import { IconType } from "react-icons";
 
 interface CategoryInputProps {
-  icon: IconType,
-  label: string,
-  selected: boolean,
+  icon: IconType;
+  label: string;
+  selected: boolean;
   onChange: (value: string) => void;
 }
 
@@ -11,9 +11,8 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
   icon: Icon,
   label,
   selected,
-  onChange
+  onChange,
 }) => {
-
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
   };
@@ -31,7 +30,7 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
         hover:border-black
         transition
         cursor-pointer
-        ${selected ? 'border-black' : 'border-neutral-200'}
+        ${selected ? "border-black" : "border-neutral-200"}
       `}
     >
       <input
@@ -54,12 +53,9 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
           overflow-hidden"
       />
       <Icon size={30} />
-      <div className="font-semibold">
-        {label}
-      </div>
+      <div className="font-semibold">{label}</div>
     </label>
-
   );
-}
+};
 
 export default CategoryInput;

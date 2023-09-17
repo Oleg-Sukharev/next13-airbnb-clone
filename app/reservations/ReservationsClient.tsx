@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { toast } from "react-hot-toast";
 import axios from "axios";
@@ -11,39 +11,40 @@ import Container from "@/app/components/Container";
 import ListingCard from "@/app/components/listings/ListingCard";
 
 interface ReservationsClientProps {
-  reservations: SafeReservation[],
-  currentUser?: SafeUser | null,
+  reservations: SafeReservation[];
+  currentUser?: SafeUser | null;
 }
 
 const ReservationsClient: React.FC<ReservationsClientProps> = ({
   reservations,
-  currentUser
+  currentUser,
 }) => {
   const router = useRouter();
-  const [deletingId, setDeletingId] = useState('');
+  const [deletingId, setDeletingId] = useState("");
 
-  const onCancel = useCallback((id: string) => {
-    setDeletingId(id);
+  const onCancel = useCallback(
+    (id: string) => {
+      setDeletingId(id);
 
-    axios.delete(`/api/reservations/${id}`)
-      .then(() => {
-        toast.success('Reservation cancelled');
-        router.refresh();
-      })
-      .catch(() => {
-        toast.error('Something went wrong.')
-      })
-      .finally(() => {
-        setDeletingId('');
-      })
-  }, [router]);
+      axios
+        .delete(`/api/reservations/${id}`)
+        .then(() => {
+          toast.success("Reservation cancelled");
+          router.refresh();
+        })
+        .catch(() => {
+          toast.error("Something went wrong.");
+        })
+        .finally(() => {
+          setDeletingId("");
+        });
+    },
+    [router],
+  );
 
   return (
     <Container>
-      <Heading
-        title="Reservations"
-        subtitle="Bookings on your properties"
-      />
+      <Heading title="Reservations" subtitle="Bookings on your properties" />
       <div
         className="
           mt-10
@@ -72,6 +73,6 @@ const ReservationsClient: React.FC<ReservationsClientProps> = ({
       </div>
     </Container>
   );
-}
+};
 
 export default ReservationsClient;
